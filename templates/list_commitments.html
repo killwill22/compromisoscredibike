@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compromisos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <!-- Botones de navegación -->
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{{ url_for('crear_compromiso') }}" class="btn btn-primary shadow-sm mr-2">Crear Compromiso</a>
+            <a href="{{ url_for('list_payment_commitments') }}" class="btn btn-info shadow-sm mr-2">Listar Compromisos</a>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger shadow-sm">Cerrar Sesión</a>
+        </div>
+
+        <!-- Título de la página -->
+        <h2 class="text-center mb-4">Lista de Compromisos</h2>
+
+        <!-- Tabla de compromisos -->
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Cliente</th>
+                    <th>Cédula</th>
+                    <th>Valor</th>                    
+                    <th>Fecha de Compromiso</th>
+                    <th>Usuario</th>                    
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if compromisos %}
+                    {% for compromiso in compromisos %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ compromiso.cliente }}</td>
+                            <td>{{ compromiso.cedula }}</td>
+                            <td>{{ compromiso.valor }}</td>
+                            <td>{{ compromiso.fecha_compromiso }}</td>
+                            <td>{{ compromiso.creado_por }}</td>
+                            <td>
+                                <a href="{{ url_for('update_payment_commitment', id=compromiso.id) }}" class="btn btn-warning btn-sm">Actualizar Fecha</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="text-center">No hay compromisos disponibles.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
