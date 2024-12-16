@@ -14,6 +14,10 @@
                 <label for="fecha_compromiso" class="form-label">Nueva Fecha de Compromiso</label>
                 <input type="date" class="form-control" id="fecha_compromiso" name="fecha_compromiso" value="{{ compromiso.fecha_compromiso }}" required>
             </div>
+            <div class="mb-3">
+                <label for="observacion" class="form-label">Nueva observacion</label>
+                <input type="text" class="form-control" id="observacion" name="observacion" value="{{ compromiso.observacion }}" required>
+            </div>
             <button type="submit" class="btn btn-primary">Actualizar</button>
         </form>
     </div>

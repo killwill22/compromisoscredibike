@@ -25,7 +25,8 @@
                     <th>#</th>
                     <th>Cliente</th>
                     <th>Cédula</th>
-                    <th>Valor</th>                    
+                    <th>Valor</th> 
+                    <th>Observaciones</th> 
                     <th>Fecha de Compromiso</th>
                     <th>Usuario</th>                    
                     <th>Acciones</th>
@@ -39,10 +40,11 @@
                             <td>{{ compromiso.cliente }}</td>
                             <td>{{ compromiso.cedula }}</td>
                             <td>{{ compromiso.valor }}</td>
+                            <td>{{ compromiso.observacion}}</td>
                             <td>{{ compromiso.fecha_compromiso }}</td>
                             <td>{{ compromiso.creado_por }}</td>
                             <td>
-                                <a href="{{ url_for('update_payment_commitment', id=compromiso.id) }}" class="btn btn-warning btn-sm">Actualizar Fecha</a>
+                                <a href="{{ url_for('update_payment_commitment', id=compromiso.id) }}" class="btn btn-warning btn-sm">Prog de nuevo</a>
                             </td>
                         </tr>
                     {% endfor %}

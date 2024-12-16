@@ -92,6 +92,7 @@ def crear_compromiso():
             cliente = request.form['cliente']
             cedula = request.form['cedula']
             valor = request.form['valor']
+            observacion= request.form['observacion']
             fecha_compromiso = request.form['fecha_compromiso']
             
             # Validar fecha de compromiso
@@ -102,6 +103,7 @@ def crear_compromiso():
                 "cliente": cliente,
                 "cedula": cedula,
                 "valor": valor,
+                "observacion": observacion,                
                 "fecha_compromiso": fecha_compromiso,
                 "creado_por": session['nombre_usuario']  # Almacenar el nombre del usuario que creó el compromiso
                 }).execute()
@@ -137,10 +139,14 @@ def update_payment_commitment(id):
 
     if request.method == 'POST':
         nueva_fecha = request.form['fecha_compromiso']
+        nueva_observacion = request.form['observacion']
+
         supabase.table('compromisos').update({
-            'fecha_compromiso': nueva_fecha
+            'fecha_compromiso': nueva_fecha,
+            'observacion': nueva_observacion
         }).eq('id', str(id)).execute()
-        flash('Fecha de compromiso actualizada exitosamente', 'success')
+
+        flash('Fecha y observación del compromiso actualizadas exitosamente', 'success')
         return redirect(url_for('list_payment_commitments'))
 
     return render_template('update_commitment.html', compromiso=compromiso)
