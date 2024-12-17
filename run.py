@@ -118,11 +118,13 @@ def crear_compromiso():
 
 
 # Listar compromisos
+
+
 @app.route('/list_payment_commitments')
 def list_payment_commitments():
     if 'logged_in' in session and session['rol'] in ['admin', 'root']:
         fecha_actual = datetime.now().strftime('%Y-%m-%d')
-        compromisos = supabase.table('compromisos').select('*').order('fecha_compromiso', desc=True).execute().data
+        compromisos = supabase.table('compromisos').select('*').order('fecha_compromiso', desc=False).execute().data
         return render_template('list_commitments.html', compromisos=compromisos)
     return redirect(url_for('index'))
 

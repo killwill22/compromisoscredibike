@@ -5,6 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Compromisos</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #aab4be; /* Gris Oscuro */
+            color: #000000; /* Letras Blancas */
+        }
+        .table-striped tbody tr:nth-of-type(even) {
+            background-color: #f8f9fa; /* Gris Claro */
+            color: #000000; /* Letras Negras */
+        }
+        
+        .table-bordered th, .table-bordered td {
+            border: 1px solid #6c757d; /* Bordes más oscuros */
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-4">
@@ -12,23 +27,27 @@
         <div class="d-flex justify-content-end mb-3">
             <a href="{{ url_for('crear_compromiso') }}" class="btn btn-primary shadow-sm mr-2">Crear Compromiso</a>
             <a href="{{ url_for('list_payment_commitments') }}" class="btn btn-info shadow-sm mr-2">Listar Compromisos</a>
+            <a href="{{ url_for('create_client') }}" class="btn btn-dark shadow-sm mr-2">Crear Cliente</a>
+            <a href="{{ url_for('list_clients') }}" class="btn btn-success shadow-sm mr-2">Listar Cliente</a>
+            <a href="{{ url_for('search_client') }}" class="btn btn-warning shadow-sm mr-2">Buscar Placa</a>
             <a href="{{ url_for('logout') }}" class="btn btn-danger shadow-sm">Cerrar Sesión</a>
+            
         </div>
 
         <!-- Título de la página -->
         <h2 class="text-center mb-4">Lista de Compromisos</h2>
 
         <!-- Tabla de compromisos -->
-        <table class="table table-striped">
-            <thead class="thead-dark">
+        <table class="table table-striped table-hover table-bordered rounded mb-4">
+            <thead class="table-striped table-info">
                 <tr>
                     <th>#</th>
                     <th>Cliente</th>
                     <th>Cédula</th>
-                    <th>Valor</th> 
-                    <th>Observaciones</th> 
+                    <th>Valor</th>
+                    <th>Observaciones y Gestión</th>
                     <th>Fecha de Compromiso</th>
-                    <th>Usuario</th>                    
+                    <th>Usuario</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -40,21 +59,23 @@
                             <td>{{ compromiso.cliente }}</td>
                             <td>{{ compromiso.cedula }}</td>
                             <td>{{ compromiso.valor }}</td>
-                            <td>{{ compromiso.observacion}}</td>
+                            <td>{{ compromiso.observacion }}</td>
                             <td>{{ compromiso.fecha_compromiso }}</td>
                             <td>{{ compromiso.creado_por }}</td>
                             <td>
-                                <a href="{{ url_for('update_payment_commitment', id=compromiso.id) }}" class="btn btn-warning btn-sm">Prog de nuevo</a>
+                                <a href="{{ url_for('update_payment_commitment', id=compromiso.id) }}"
+                                   class="btn btn-warning btn-sm">Reprogramar</a>
                             </td>
                         </tr>
                     {% endfor %}
                 {% else %}
                     <tr>
-                        <td colspan="7" class="text-center">No hay compromisos disponibles.</td>
+                        <td colspan="8" class="text-center">No hay compromisos disponibles.</td>
                     </tr>
                 {% endif %}
             </tbody>
         </table>
+        
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
